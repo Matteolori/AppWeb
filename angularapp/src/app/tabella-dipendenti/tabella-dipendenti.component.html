@@ -1,0 +1,46 @@
+<table mat-table
+       [dataSource]="dipendenti" multiTemplateDataRows
+       class="mat-elevation-z8">
+  <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+    <td mat-cell *matCellDef="let dipendente"> {{dipendente[column]}} </td>
+  </ng-container>
+  <ng-container matColumnDef="expand">
+    <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+    <td mat-cell *matCellDef="let dipendente">
+      <button mat-icon-button aria-label="expand row" (click)="(expandedDipendente = expandedDipendente === dipendente ? null : dipendente); $event.stopPropagation()">
+        <mat-icon *ngIf="expandedDipendente !== dipendente">keyboard_arrow_down</mat-icon>
+        <mat-icon *ngIf="expandedDipendente === dipendente">keyboard_arrow_up</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let dipendente" [attr.colspan]="columnsToDisplayWithExpand.length">
+      <div class="example-dipendente-detail"
+           [@detailExpand]="dipendente == expandedDipendente ? 'expanded' : 'collapsed'">
+        <div class="example-dipendente-diagram">
+          <div class="example-dipendente-position"> {{dipendente.nome}} </div>
+          <div class="example-dipendente-symbol"> {{dipendente.cognome}} </div>
+        </div>
+        <div class="example-dipendente-description">
+          {{dipendente.description}}
+          <span class="example-dipendente-description-attribution"> </span>
+        </div>
+        <button mat-icon-button color="warn" aria-label="Rimuovi dipendente" (click)="deleteDipendente(dipendente.id)">
+          <mat-icon>clear</mat-icon>
+          
+        </button>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+  <tr mat-row *matRowDef="let dipendente; columns: columnsToDisplayWithExpand;"
+      class="example-dipendente-row"
+      [class.example-expanded-row]="expandedDipendente === dipendente"
+      (click)="expandedDipendente = expandedDipendente === dipendente ? null : dipendente">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>

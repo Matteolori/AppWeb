@@ -1,0 +1,9 @@
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!dipendenti"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
+<h1 id="tableLabel">Weather forecast</h1>
+<div *ngIf="dipendenti">
+  <tabella-dipendenti [dipendenti]="dipendenti">
+
+</tabella-dipendenti></div>
+

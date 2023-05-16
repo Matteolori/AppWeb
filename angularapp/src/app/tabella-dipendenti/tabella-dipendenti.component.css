@@ -1,0 +1,47 @@
+table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-dipendente-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-dipendente-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-dipendente-row td {
+  border-bottom-width: 0;
+}
+
+.example-dipendente-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-dipendente-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-dipendente-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-dipendente-description {
+  padding: 16px;
+}
+
+.example-dipendente-description-attribution {
+  opacity: 0.5;
+}
