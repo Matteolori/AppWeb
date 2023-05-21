@@ -7,6 +7,8 @@ namespace webapi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+
+
 public class DipendenteController : ControllerBase
 {
     private readonly DipendentiDBContext _context;

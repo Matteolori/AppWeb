@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Dipendente } from '../Models/Dipendente';
-import { DipendenteService } from '../dipendente.service';
+import { DipendenteService } from '../services/dipendente.service';
 
 /**
  * @title Table with expandable rows
@@ -20,6 +20,7 @@ import { DipendenteService } from '../dipendente.service';
 })
 export class TabellaDipendentiComponent {
   @Input() public dipendenti: Dipendente[] = [];
+  @Output() public emitDipendente: EventEmitter<boolean> = new EventEmitter<boolean>();
   dataSource = this.dipendenti;
   columnsToDisplay = ['nome', 'cognome'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
@@ -32,10 +33,26 @@ export class TabellaDipendentiComponent {
   deleteDipendente(dipendenteId: number) {
     this.dipendenteService.deleteDipendente(dipendenteId).subscribe(
       () => {
+        this.dipendenteService.getAllDipendenti()
+
         this.dipendenti = this.dipendenti.filter(d => d.id !== dipendenteId);
       },
       (error) => {
         console.error('Error deleting dipendente:', error);
+      }
+    );
+  }
+
+  updatedDipendente(updatedDipendente: Dipendente) {
+    console.log(updatedDipendente);
+    this.dipendenteService.updateDipendente(updatedDipendente).subscribe(
+      (response) => {
+        this.dipendenteService.getAllDipendenti()
+        this.emitDipendente.emit(true);
+        console.log('Dipendente added successfully:', response);
+      },
+      (error) => {
+        console.error('Error adding Dipendente:', error);
       }
     );
   }

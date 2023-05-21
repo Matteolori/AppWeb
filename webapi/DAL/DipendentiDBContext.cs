@@ -6,6 +6,7 @@ namespace webapi.DAL;
 public class DipendentiDBContext: DbContext
 {
     public DbSet<Dipendente> Dipendenti { get; set; }
+    public DbSet<Utente> Utenti { get; set; }
     public DipendentiDBContext(DbContextOptions<DipendentiDBContext> options)
         : base(options)
     {
@@ -14,5 +15,7 @@ public class DipendentiDBContext: DbContext
     {
         modelBuilder.Entity<Dipendente>()
             .HasKey(p => p.Id);
+        modelBuilder.Entity<Utente>()
+           .HasKey(p => p.Id);
     }
 }

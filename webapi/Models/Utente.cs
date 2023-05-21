@@ -1,11 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace webapi.Models;
+namespace webapi.Models { 
 
-public class DomainObject
+public class Utente
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id;
+    public int Id { get; set; }
+    public string Username { get; set; }
+
+    public string Password { get; set; }
+}
 }

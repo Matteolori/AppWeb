@@ -1,0 +1,22 @@
+<form [formGroup]="dipendenteForm" (ngSubmit)="submitForm()">
+  <mat-form-field>
+    <input matInput formControlName="nome" placeholder="Nome">
+    <mat-error *ngIf="dipendenteForm.get('nome')?.invalid && dipendenteForm.get('nome')?.touched">
+      Nome is required.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="cognome" placeholder="Cognome">
+    <mat-error *ngIf="dipendenteForm.get('cognome')?.invalid && dipendenteForm.get('cognome')?.touched">
+      Cognome is required.
+    </mat-error>
+  </mat-form-field>
+
+  <div class="actions">
+    <button mat-raised-button color="primary" type="submit" [disabled]="dipendenteForm.invalid">Submit</button>
+  </div>
+</form>
+
+
+

@@ -21,8 +21,7 @@
       <div class="example-dipendente-detail"
            [@detailExpand]="dipendente == expandedDipendente ? 'expanded' : 'collapsed'">
         <div class="example-dipendente-diagram">
-          <div class="example-dipendente-position"> {{dipendente.nome}} </div>
-          <div class="example-dipendente-symbol"> {{dipendente.cognome}} </div>
+          <dipendente-details [dipendente]="dipendente" (saveDipendente)="updatedDipendente($event)"></dipendente-details>
         </div>
         <div class="example-dipendente-description">
           {{dipendente.description}}

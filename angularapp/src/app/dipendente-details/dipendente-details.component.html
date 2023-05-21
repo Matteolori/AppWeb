@@ -1,0 +1,25 @@
+<div *ngIf="!isEditMode">
+  <p>Nome: {{ dipendente?.nome }}</p>
+  <p>Cognome: {{ dipendente?.cognome }}</p>
+  <button (click)="toggleEditMode()">Edit</button>
+</div>
+
+<div *ngIf="isEditMode">
+  <form [formGroup]="dipendenteForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input matInput formControlName="nome" placeholder="Nome">
+      <mat-error *ngIf="dipendenteForm.get('nome')?.invalid && dipendenteForm.get('nome')?.touched">
+        Nome is required.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="cognome" placeholder="Cognome">
+      <mat-error *ngIf="dipendenteForm.get('cognome')?.invalid && dipendenteForm.get('cognome')?.touched">
+        Cognome is required.
+      </mat-error>
+    </mat-form-field>
+    <button type="submit">Save</button>
+    <button (click)="toggleEditMode()">Cancel</button>
+  </form>
+</div>
